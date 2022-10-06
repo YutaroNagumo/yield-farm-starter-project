@@ -33,12 +33,14 @@ contract DaiToken {
         return true;
     }
 
+    //_spenderがmsg.senderの_valueに対して送金権限を持つ
     function approve(address _spender, uint256 _value) public returns (bool success) {
         allowance[msg.sender][_spender] = _value;
         emit Approval(msg.sender, _spender, _value);
         return true;
     }
 
+    //小切手的な
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
         require(_value <= balanceOf[_from]);
         require(_value <= allowance[_from][msg.sender]);
